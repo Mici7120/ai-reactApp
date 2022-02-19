@@ -54,27 +54,33 @@ const App = observer(class App extends Component {
   nextMove() {
     this.iterator.next();
   }
+  /*
+  
+  */
 
   render() {
     let appState = this.state;
     return (
       <div className="game">
         <table>
+          <thead>
           <tr>
             <td></td>
-            <td style={{ 'background-color': 'TEAL', 'color': 'TEAL' }}>I</td>
+            <td style={{ 'backgroundColor': 'TEAL', 'color': 'TEAL' }}>I</td>
             <td></td>
           </tr>
+          </thead>
+          <tbody>
           <tr>
-            <td style={{ 'background-color': 'LIGHTCORAL', 'color': 'LIGHTCORAL' }}>__</td>
-            <td><div style={{ 'background-color': 'SILVER' }}>
+            <td style={{ 'backgroundColor': 'LIGHTCORAL', 'color': 'LIGHTCORAL' }}>__</td>
+            <td><div style={{ 'backgroundColor': 'SILVER' }}>
               <Map app={appState.board} /></div>
             </td>
-            <td style={{ 'background-color': 'LIGHTCORAL', 'color': 'LIGHTCORAL' }}>__</td>
+            <td style={{ 'backgroundColor': 'LIGHTCORAL', 'color': 'LIGHTCORAL' }}>__</td>
           </tr>
           <tr>
             <td></td>
-            <td style={{ 'background-color': 'TEAL', 'color': 'TEAL' }}>I</td>
+            <td style={{ 'backgroundColor': 'TEAL', 'color': 'TEAL' }}>I</td>
             <td></td>
           </tr>
           <tr>
@@ -85,8 +91,9 @@ const App = observer(class App extends Component {
             </td>
             <td></td>
           </tr>
+          </tbody>
         </table>
-      </div >
+      </div>
     );
   }
 });

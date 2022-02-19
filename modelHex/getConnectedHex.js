@@ -1,29 +1,39 @@
 /**
  * Lista los nodos que estan conectados
- * @param {Array} hex Lista de los nodos de un jugador
+ * @param {Array} hex Lista de los hex de un jugador
  * @returns
  */
-function getConnectedHex(hex) {
-    let connectedHex = [];
+function getConnectedHex(hexs) {
+    let connectedHex = [[hexs[0]]]; //Array de Arrays de hex conectados
 
-    if (hex.length > 2) { //Verifica que hayan mas de 2 nodos
+    if (hexs.length > 1) { //Verifica que hayan mas de 2 nodos
+        for (let i = 1; i < hexs.length; i++) { //Recorremos todos los hex del jugados
+            let inTheGroup = false;
 
-        for (let i = 0; i < hex.length - 1; i++) {
-            let h = hexNeighbor(hex[0]); //Hexs adyacentes al 1 hex
-            connectedHex.conc   at(
-            h.map((item) => {
-                if(item[0] === h[i][0]
-                    && item[1] === h[i][1]){
-                        return item;
+            for(let group of connectedHex){ //Recorremos cada uno de los grupos
+                //Ahora verificamos si el hex es vecino de alguno de los hex del grupo
+                //si lo es, se añade al grupo
+                for(let a of group){
+                    if(isNeighbor(hexs[i], a)){
+                        group.push(hexs[i]);
+                        inTheGroup = true;
+                        break;
+                    }
                 }
-            })
-            );
+            }
+            
+            //Si no pertenece a ningun grupo, se agrega como otro
+            if(!inTheGroup){
+                connectedHex.push([hexs[i]]);
+            }
+            
         }
     }
 
-
     return connectedHex;
 }
+
+//console.log(getConnectedHex([[0, 1], [0, 2], [0, 3], [2, 4], [5, 5], [2, 5]]))
 
 /**
  * Compara si los 2 Hex son adyacentes
@@ -32,11 +42,12 @@ function getConnectedHex(hex) {
  * @returns Boolean (Si son adyacentes)
  */
 function isNeighbor(hex1, hex2) {
-    let hex1Neighbor = hexNeighbor(hex1);
+    let hex1Neighbor = hexNeighbor(hex1, 7);
+    //console.log(hex1Neighbor);
     let is = false;
 
     for (let h of hex1Neighbor) {
-        if (h[0] === hex2[0] && h[1] && hex2[1]) {
+        if (h[0] === hex2[0] && h[1] === hex2[1]) {
             is = true;
             break;
         }
@@ -58,7 +69,7 @@ function hexNeighbor(hex1, size) {
     let r = hex1[0];
     let c = hex1[1];
 
-    let neighbors;
+    let neighbors = [];
 
     //Coordenadas de los hex alrededores
     let neighborsOfHex = [
@@ -71,12 +82,15 @@ function hexNeighbor(hex1, size) {
     ];
 
     for (let h of neighborsOfHex) {
-        if (row >= 0 && row < size && col >= 0 && col < size) {
+        if (h[0] >= 0 && h[0] < size && h[1] >= 0 && h[1] < size) {
             neighbors.push(h);
         }
     }
 
     return neighbors;
 }
+
+//console.log(hexNeighbor([6,6], 7)); ok
+//console.log(isNeighbor([0, 1], [0, 2]));
 
 module.exports = getConnectedHex;

@@ -22,23 +22,23 @@ class HexAgent extends Agent {
         //console.log(board);
         console.log(nTurn);
 
-        let move = available[Math.round(Math.random() * (available.length - 1))];
+        let ava = available[Math.round(Math.random() * (available.length - 1))];
+        let move = [Math.floor(ava / board.length), ava % board.length];
         if (nTurn == 0) { // First move
             move = [Math.floor(size / 2), Math.floor(size / 2) - 1];
-            console.log(move)
         } else if (nTurn == 1) {
             move = [Math.floor(size / 2), Math.floor(size / 2)];
-            console.log(move)
         }
-
+        console.log("Move:",move)
+        
         //Verificamos si estan conectados
         let players = playerHex(board);
         //console.log("Player 1:",players.player1);
         //console.log("Player 2:",players.player2);
         let player1 = getConnectedHex(players.player1);
         let player2 = getConnectedHex(players.player2);
-        //console.log("Player1 ", player1);
-        //console.log("Player2 ", player2);
+        console.log("Player1 ", player1);
+        console.log("Player2 ", player2);
 
         return move;
 
