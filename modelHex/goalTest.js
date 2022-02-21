@@ -94,10 +94,10 @@ function pushIfAny(result, board, player, row, col) {
 }
 
 /**
- * Chech if the current hex is at the opposite border of the board
- * @param {Number} currentHex 
- * @param {Number} player 
- * @param {Number} size 
+ * Check if the current hex is at the opposite border of the board
+ * @param {Number} currentHex
+ * @param {Number} player
+ * @param {Number} size
  */
 function isEndHex(currentHex, player, size) {
     if (player === "1") {

@@ -12,13 +12,15 @@ import Map from './components/Map.jsx';
 import passedClickThreshold from './utils/passedClickThreshold';
 
 import problemContainer from './modelHex/problemContainer';
-import HextAgent from './modelHex/HexAgent';
+//import HextAgent from './modelHex/HexAgent';
+import HextAgentRandom from './modelHex/HexAgentRandom'
+import HextAgentMinMax from './modelHex/HexAgentMinMax'
 
 console.log(problemContainer)
-console.log(HextAgent)
+//console.log(HextAgent)
 
-problemContainer.addAgent("1", HextAgent, { play: true });
-problemContainer.addAgent("2", HextAgent, { play: false });
+problemContainer.addAgent("1", HextAgentRandom, { play: true });
+problemContainer.addAgent("2", HextAgentMinMax, { play: false });
 
 const App = observer(class App extends Component {
   constructor(props) {

@@ -93,4 +93,4 @@ function hexNeighbor(hex1, size) {
 //console.log(hexNeighbor([6,6], 7)); ok
 //console.log(isNeighbor([0, 1], [0, 2]));
 
-module.exports = getConnectedHex;
+module.exports = getConnectedHex, hexNeighbor;

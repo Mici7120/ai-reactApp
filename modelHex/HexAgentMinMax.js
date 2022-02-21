@@ -1,7 +1,7 @@
 const Agent = require('ai-agents').Agent;
-const random = require('./random.js');
 const minMax = require('./minMax.js');
 const getEmptyHex = require('./getEmptyHex');
+const transposeHex = require('./transposeHex.js')
 
 class HexAgent extends Agent {
     constructor(value) {
@@ -15,36 +15,21 @@ class HexAgent extends Agent {
      * Example: [1, 1]
      */
     send() {
-        console.log("perception", this.perception)
         let board = this.perception;
         let size = board.length;
         let available = getEmptyHex(board);
         let nTurn = size * size - available.length;
+        console.log(nTurn);
 
-        //Primer movimiento
-        /*
-        if (nTurn == 0) { // First move
-            return [Math.floor(size / 2), Math.floor(size / 2) - 1];
-        } else if (nTurn == 1) {
-            return [Math.floor(size / 2), Math.floor(size / 2)];
-        }
-        */
-        console.log("board_minmax", board);
-        let move;
+        console.log("board_minmax_before_transpose", board);
 
-        //Movimiento aleatorio
-        //move = random(board, size, available, nTurn);
-
-        //Algoritmo minMax
-        /*
         if (nTurn % 2 == 1){
             board = transposeHex(board);
+            console.log("board_minmax_after_transpose", board);
         }
-        */
-       let tablero = board.slice();
-        move = minMax(tablero, size);
-        
-        return move;
+
+
+        return minMax(board, size);
     }
 }
 

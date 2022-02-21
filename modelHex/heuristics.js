@@ -1,5 +1,6 @@
 const { min } = require('lodash');
-const getConnectedHex = require('./getConnectedHex.js');
+const getConnectedHex = require('./connectedHex.js');
+const playerHexs = require('./playerHexs.js')
 
 /**
  * Calcula el valor de la heuristica
@@ -8,7 +9,11 @@ const getConnectedHex = require('./getConnectedHex.js');
  * @param {Matrix[2]} groupConnectedHexs 
  * @param {int} size
  */
-function heuristics(groupConnectedHexs, size){
+function heuristics(board, player, size){
+
+    let playerHex = playerHexs(board, player);
+
+    let groupConnectedHexs = getConnectedHex(playerHex);
     //Se verifica, en los grupos de hex conectados, que haya un hex en cada fila o columna
     let heuristic = [];
 
@@ -32,8 +37,8 @@ function heuristics(groupConnectedHexs, size){
 
 }
 
-//let connected = getConnectedHex([[0, 1], [0, 2], [0, 3], [2, 4], [5, 5], [2, 5]]);
-//console.log("Hex conectados", connected);
-
-//let heuristica = heuristics(connected, 7);
+//let hex = [[0, 1], [0, 2], [0, 3], [2, 4], [5, 5], [2, 5]];
+//let heuristica = heuristics(hex, 7);
 //console.log("Heuristica: ", heuristica);
+
+module.exports = heuristics;
