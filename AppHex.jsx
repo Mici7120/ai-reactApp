@@ -14,12 +14,12 @@ import passedClickThreshold from './utils/passedClickThreshold';
 import problemContainer from './modelHex/problemContainer';
 //import HextAgent from './modelHex/HexAgent';
 import HextAgentRandom from './modelHex/HexAgentRandom'
-import HextAgentMinMax from './modelHex/HexAgentMinMax'
+import HextAgentMinMax from './modelHex/HexAgentMinMaxAlphaBeta'
 
 console.log(problemContainer)
 //console.log(HextAgent)
 
-problemContainer.addAgent("1", HextAgentRandom, { play: true });
+problemContainer.addAgent("1", HextAgentMinMax, { play: true });
 problemContainer.addAgent("2", HextAgentMinMax, { play: false });
 
 const App = observer(class App extends Component {

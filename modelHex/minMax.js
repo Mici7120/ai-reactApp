@@ -1,5 +1,3 @@
-const { min } = require('lodash');
-const { max } = require('lodash');
 const heuristics = require("./heuristics.js");
 const getEmptyHex = require("./getEmptyHex.js");
 const goalTest = require('./goalTest.js')
@@ -7,7 +5,7 @@ const goalTest = require('./goalTest.js')
 function minMax(board, size){
     let move;
 
-    move = maxPlay(board, [0,0], '1', 3);
+    move = maxPlay(board, [0,0], '1', 4);
 
     return move[0];
 }
@@ -21,10 +19,10 @@ function maxPlay(board, play, player, depth){
     }
 
     if(depth == 0){
-        return [play, heuristics(board, player, board.lenght)];
+        return [play, heuristics(board, player, board.length)];
     }
     
-    for(let i of emptyHex(getEmptyHex(board))){
+    for(let i of emptyHex(getEmptyHex(board), board.length)){
         let boardM = newBoard(board, i, player);
         if(player === '1'){
             player = '2'
@@ -52,10 +50,10 @@ function minPlay(board, play, player, depth){
     }
 
     if(depth < 1){
-        return [play, heuristics(board, player, board.lenght)];
+        return [play, heuristics(board, player, board.length)];
     }
     
-    for(let i of emptyHex(getEmptyHex(board))){
+    for(let i of emptyHex(getEmptyHex(board), board.length)){
         let boardM = newBoard(board, i, player);
         if(player === '1'){
             player = '2'
@@ -73,7 +71,6 @@ function minPlay(board, play, player, depth){
 }
 
 function newBoard(board, move, player){
-    //console.log(board);
     let nBoard = board;
     let row = move[0];
     let column = move[1];
@@ -82,12 +79,11 @@ function newBoard(board, move, player){
     return nBoard;
 }
 
-function emptyHex(getEmptyHex){
+function emptyHex(getEmptyHex, size){
     let result = [];
     for(let i of getEmptyHex){
-        result.push([i % 7, Math.trunc(i / 7)])
+        result.push([i % size, Math.trunc(i / size)])
     }
-
     return result;
 }
 

@@ -1,4 +1,4 @@
-const { min } = require('lodash');
+const { max } = require('lodash');
 const getConnectedHex = require('./connectedHex.js');
 const playerHexs = require('./playerHexs.js')
 
@@ -19,12 +19,12 @@ function heuristics(board, player, size){
 
     //Se halla la heuristica de cada uno de los grupos de hex conectados
     for(let g of groupConnectedHexs){ //Recorremos los grupos de hex conectados
-        let NHeuristic = size;
+        let NHeuristic = 0;
 
         for(let c of g){
             for(let i = 0; i < size; i++){ //Verificamos que haya almenos un hex en cada columna
                 if(c[1] == i){ //Si hay un hex en la columna
-                    NHeuristic --;
+                    NHeuristic ++;
                     break;
                 }
             }
@@ -33,7 +33,7 @@ function heuristics(board, player, size){
     }
 
     
-    return min(heuristic);
+    return max(heuristic);
 
 }
 
